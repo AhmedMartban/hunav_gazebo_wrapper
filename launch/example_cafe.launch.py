@@ -49,7 +49,7 @@ def generate_launch_description():
         parameters=[agent_conf_file]
     )
 
-    # world base file
+    # world base file                                      #########
     world_file = PathJoinSubstitution([
         FindPackageShare('hunav_gazebo_wrapper'),
         'worlds',
