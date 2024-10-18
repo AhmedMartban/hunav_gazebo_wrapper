@@ -35,14 +35,17 @@ def generate_launch_description():
         os.path.join(workspace_root, 'src', 'deps', 'hunav_gazebo_wrapper'),
         os.path.join(workspace_root, 'src', 'deps', 'hunav_gazebo_wrapper', 'media', 'models'),
         os.path.join(workspace_root, 'src', 'deps', 'hunav_gazebo_wrapper', 'worlds'),
-        os.path.join(workspace_root, 'src', 'deps', 'hunav_sim')
+        os.path.join(workspace_root, 'src', 'deps', 'hunav_sim'),
+        # Add the install path for hunav_gazebo_wrapper models
+        os.path.join(workspace_root, 'install', 'hunav_gazebo_wrapper', 'share', 'hunav_gazebo_wrapper', 'models')
     ]
+
     GZ_SIM_RESOURCE_PATHS_COMBINED = ':'.join(GZ_SIM_RESOURCE_PATHS)
 
     # Set environment variables for Gazebo Sim paths
     set_gz_config_path = SetEnvironmentVariable('GZ_CONFIG_PATH', GZ_CONFIG_PATH)
     set_gz_sim_physics_engine_path = SetEnvironmentVariable('GZ_SIM_PHYSICS_ENGINE_PATH', GZ_SIM_PHYSICS_ENGINE_PATH)
-    set_gz_sim_resource_path = SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', GZ_SIM_RESOURCE_PATHS_COMBINED)
+    set_gz_sim_resource_path = SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', GZ_SIM_RESOURCE_PATHS_COMBINED)
 
     # World generation parameters
     world_file = LaunchConfiguration('base_world')
@@ -157,7 +160,7 @@ def generate_launch_description():
         description='Specify the name of the metrics configuration file in the config directory'
     )
     declare_arg_world = DeclareLaunchArgument(
-        'base_world', default_value='empty.sdf',  # Specify .world file explicitly
+        'base_world', default_value='empty_world.world',  # Specify .world file explicitly
         description='Specify the world file name'
     )
     declare_gz_obs = DeclareLaunchArgument(
